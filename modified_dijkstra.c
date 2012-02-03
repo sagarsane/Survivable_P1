@@ -73,19 +73,15 @@ int main(int argc, char *argv[]){
 	initialize_topology();
 	src = atoi(argv[2])-1;
 	dest = atoi(argv[3])-1;
-	printf("aadhi\n");
 //	for(i=0;i<total_nodes;i++)
 //	{
-		modified_dijkstra(src);
-		printf("here\n");
-		save_path(src,dest);
-		printf("again here\n");
-//		reset_topology();
+	modified_dijkstra(src);
+	save_path(src,dest);
+//	reset_topology();
 //		printf("Time taken for source Node %d is : %.15lf microseconds\n",i+1,(double)(end.tv_usec-start.tv_usec + (end.tv_sec-start.tv_sec)));
 
 
 //	}
-
 
 	print_path(src,dest);	
 

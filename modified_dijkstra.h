@@ -17,6 +17,11 @@ typedef struct node_{
 	int next_hop;
 }Node;
 
+typedef struct path_edge_{
+	int nodes[2];
+	struct path_edge_ *next;
+}Path;
+
 Node *node;
 FILE *file;
 int total_nodes;
