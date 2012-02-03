@@ -14,9 +14,7 @@ typedef struct node_{
 	int pred;
 	int flag; //denotes whether node's distance to src is permanent or can change
 	double cost; // length of node to source
-	
-	double *saved_cost;
-	int *next_hop;
+	int next_hop;
 }Node;
 
 Node *node;

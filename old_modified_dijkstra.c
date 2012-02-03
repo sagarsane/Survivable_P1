@@ -1,20 +1,8 @@
 #include "modified_dijkstra.h"
 
-void save_path(int src,int dest){
-	int i,j,cost=0;
-	
-	i = dest;	
-
-	while(i!=src)
-	{
-		j = node[i].pred;
-		node[j].next_hop = i;
-		cost+=node[j].edge_cost[i];
-		i = j;
-	}
-	node[i].cost = cost;
-	
-/*
+void save_path(int current_node){
+	int i;
+	int j = 0,k;
 	for(i=0;i<total_nodes;i++)
 	{
 		//printf("Pred for %d is: %d\n",i+1,node[i].pred+1);
@@ -35,7 +23,7 @@ void save_path(int src,int dest){
 			node[current_node - 1].saved_cost[i] = 0.0f;
 		}	
 	}
-*/	
+	
 }
 
 
@@ -50,20 +38,12 @@ void reset_topology(){
 
 void print_path(int src, int dest)
 {
-	int i=src;
-	printf("The shortest path between %d and %d is:\n%d",src+1,dest+1,src+1);
-	while(i!=dest)
-	{
-		printf("\t%d",node[i].next_hop+1);
-		i = node[i].next_hop;
-	}
-	printf("\nThe cost of the path is: %.2lf\n\n",node[src].cost);
+	printf("\nCost of the Least cost path between Node1(%d) and Node2(%d) is : %.2lf\n\n",atoi(src),atoi(dest),node[atoi(src-1)].saved_cost[atoi(dest-1)]);
 }
 
 int main(int argc, char *argv[]){
 	int i;
 	total_nodes = -1;
-	int src,dest;
 	
 	if(argc != 4){
 		perror("Incorrect command line arguments\n");
@@ -71,29 +51,24 @@ int main(int argc, char *argv[]){
 	}
 	file = fopen(argv[1],"r");
 	initialize_topology();
-	src = atoi(argv[2])-1;
-	dest = atoi(argv[3])-1;
-	printf("aadhi\n");
-//	for(i=0;i<total_nodes;i++)
-//	{
-		modified_dijkstra(src);
-		printf("here\n");
-		save_path(src,dest);
-		printf("again here\n");
-//		reset_topology();
+	for(i=0;i<total_nodes;i++)
+	{
+		modified_dijkstra(i+1,0);
+		save_path(i+1);
+		reset_topology();
 //		printf("Time taken for source Node %d is : %.15lf microseconds\n",i+1,(double)(end.tv_usec-start.tv_usec + (end.tv_sec-start.tv_sec)));
 
 
-//	}
+	}
 
 
-	print_path(src,dest);	
+	print_path(argv[2],argv[3]);	
 
 	for(i=0;i<total_nodes;i++)
 	{
 		free(node[i].edge_cost);
-//		free(node[i].saved_cost);
-//		free(node[i].next_hop);
+		free(node[i].saved_cost);
+		free(node[i].next_hop);
 	}
 	free(node);
 }	
@@ -112,8 +87,8 @@ void initialize_topology(){
 
 	for(i = 0;i< total_nodes;i++){ //initialize node structure
 		node[i].edge_cost = (double *)malloc(sizeof(double) * total_nodes);
-		//node[i].next_hop = (int *)malloc(sizeof(int) * total_nodes);
-		//node[i].saved_cost = (double *)malloc(sizeof(double) * total_nodes);
+		node[i].next_hop = (int *)malloc(sizeof(int) * total_nodes);
+		node[i].saved_cost = (double *)malloc(sizeof(double) * total_nodes);
 		for(j = 0;j < total_nodes;j++)
 			node[i].edge_cost[j] = INF;	
 		node[i].pred = i;
@@ -125,10 +100,7 @@ void initialize_topology(){
 	int temp_i = -1,temp_j = -1;
 	double temp_cost = 0.0f;
 	while(fscanf(file,"%d %d %lf",&temp_i,&temp_j,&temp_cost)!= EOF){
-		if(temp_cost<0)
-			node[temp_i-1].edge_cost[temp_j-1] = INF;
-		else
-			node[temp_i-1].edge_cost[temp_j-1] = temp_cost;
+		node[temp_i-1].edge_cost[temp_j-1] = temp_cost;
 		node[temp_j-1].edge_cost[temp_i-1] = temp_cost;
 	}
 }
@@ -159,7 +131,7 @@ void initialization()
 
 
 }
-/*void print_topology(int src)
+void print_topology(int src)
 {
 	int k;
 	printf("\nRouting table of node %d -->\n\n",src);
@@ -174,7 +146,7 @@ void initialization()
                         //printf("  %d\t  %d\tINFINITY\n",src,k+1);
         }
 
-}*/
+}
 
 int all_flags_set()
 {
@@ -187,12 +159,12 @@ int all_flags_set()
 	return 1;
 }
 
-int modified_dijkstra(int src){
+void modified_dijkstra(int src, char flag){
 	
 	int i,k;
 	double min;
 
-	k=src;
+	k=src-1;
         //node[src-1].cost=0.0f;
         node[k].flag=1;
 
