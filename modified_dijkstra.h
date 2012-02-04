@@ -19,10 +19,12 @@ typedef struct node_{
 
 typedef struct path_edge_{
 	int nodes[2];
+	double cost;
 	struct path_edge_ *next;
 }Path;
 
 Node *node;
+Path **path;
 FILE *file;
 int total_nodes;
 

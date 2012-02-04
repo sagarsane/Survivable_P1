@@ -1,6 +1,53 @@
 #include "modified_dijkstra.h"
 
-void save_path(int src,int dest){
+
+void print_shortest_path(int index){
+	int i;
+	double cost = 0.0f;
+	Path *p;
+	p = path[index];
+	printf("\nPath %d is:",index+1);
+	while(p->next!=NULL){
+		printf("\t%d-%d",p->nodes[0],p->nodes[1]);
+		cost += p->cost;
+		p = p->next;
+	}
+	printf("\nIts Cost is: %.2f\n",cost);
+}
+
+void find_interlace(){
+	
+	int i,j,flag = 0;
+	Path *p,*q,*pslow,*qslow;
+	pslow = path[0];
+	qslow = path[1];
+	p = pslow->next;
+	q = qslow->next;
+	while(p!=NULL){
+		while(q!=NULL){
+			if((p->nodes[0] == q->nodes[0] && p->nodes[1] == q->nodes[1]) || (p->nodes[0] == q->nodes[1] && p->nodes[1] == q->nodes[0])){ 
+				//interlace found
+				pslow->next = q->next;
+				qslow->next = p->next;
+				q = qslow->next;
+				p = pslow->next;
+				flag = 1;
+			}
+			else{
+				qslow = q;
+				q = q->next;
+			}
+		}
+		if(!flag){
+			pslow = p;
+			p = p->next;
+		}
+		flag = 0;
+
+	}
+
+}
+void save_path(int src,int dest,int flag){
 	int i,j,cost=0;
 	
 	i = dest;	
@@ -13,7 +60,52 @@ void save_path(int src,int dest){
 		i = j;
 	}
 	node[i].cost = cost;
+
+	Path *temp,*p;
+	int next_hop = node[src].next_hop;
+	temp = malloc(sizeof(Path));
+
 	
+	temp->nodes[0] = src;
+	temp->nodes[1] = next_hop;
+	temp->cost = node[src].edge_cost[next_hop];
+	path[flag] =temp; //head
+	if(flag == 0){
+		node[src].edge_cost[next_hop] = 0;
+		node[next_hop].edge_cost[src] = -node[next_hop].edge_cost[src];
+	}
+	else{  //revert Edges
+		node[next_hop].edge_cost[src] = -node[next_hop].edge_cost[src];
+		node[src].edge_cost[next_hop] = node[next_hop].edge_cost[src];
+	}
+	i = node[src].next_hop;
+	
+	p = temp;
+//	temp = NULL;
+	while(node[i].next_hop!=dest){
+		next_hop = node[i].next_hop;
+		temp = malloc(sizeof(Path));
+		temp->nodes[0] = i;
+		temp->nodes[1] = next_hop;
+		temp->cost = node[i].edge_cost[next_hop];
+		temp->next = NULL;
+		if(flag == 0){
+                	node[i].edge_cost[next_hop] = 0;
+	                node[next_hop].edge_cost[i] = -node[next_hop].edge_cost[i];
+        	}
+	        else{  //revert Edges
+                	node[next_hop].edge_cost[i] = -node[next_hop].edge_cost[i];
+        	        node[i].edge_cost[next_hop] = node[next_hop].edge_cost[i];
+	        }
+
+		//node[i].edge_cost[next_hop] = 0;
+		//node[next_hop].edge_cost[i] = -node[next_hop].edge_cost[i];
+		p->next = temp;
+		p = temp;
+		i = next_hop;
+	}
+
+
 /*
 	for(i=0;i<total_nodes;i++)
 	{
@@ -60,6 +152,7 @@ void print_path(int src, int dest)
 	printf("\nThe cost of the path is: %.2lf\n\n",node[src].cost);
 }
 
+/*
 int main(int argc, char *argv[]){
 	int i;
 	total_nodes = -1;
@@ -93,7 +186,7 @@ int main(int argc, char *argv[]){
 	}
 	free(node);
 }	
-
+*/
 void initialize_topology(){
 	int i,j;
 	if(!file){
@@ -106,6 +199,10 @@ void initialize_topology(){
 
 	node = (Node *)malloc(sizeof(Node)*total_nodes);
 
+	//change
+	printf("Before Initializing Path\n");	
+	path = (Path **)malloc(sizeof(Path *) * 2);
+	printf("Path Initialized\n");
 	for(i = 0;i< total_nodes;i++){ //initialize node structure
 		node[i].edge_cost = (double *)malloc(sizeof(double) * total_nodes);
 		//node[i].next_hop = (int *)malloc(sizeof(int) * total_nodes);
@@ -118,9 +215,9 @@ void initialize_topology(){
 	}
 	
 
-	int temp_i = -1,temp_j = -1;
+	int temp_i = -1,temp_j = -1,faltu = -1;
 	double temp_cost = 0.0f;
-	while(fscanf(file,"%d %d %lf",&temp_i,&temp_j,&temp_cost)!= EOF){
+	while(fscanf(file,"%d %d %lf %d",&temp_i,&temp_j,&temp_cost,&faltu)!= EOF){
 		if(temp_cost<0)
 			node[temp_i-1].edge_cost[temp_j-1] = INF;
 		else
