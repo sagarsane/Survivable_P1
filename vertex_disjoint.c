@@ -1,4 +1,4 @@
-#include "modified_dijkstra.h"
+#include "vertex_disjoint.h"
 
 int main(int argc, char *argv[]){
         int i;
@@ -20,24 +20,26 @@ int main(int argc, char *argv[]){
 	//printf("Before\n");
         modified_dijkstra(src); //Source to Dest Path
 	printf("Afer Dijkstra 1\n");
-	save_path(src,dest,0); //Save Path, Revert Edges, -ve cost
+	save_path_1(src,dest,0); //Save Path, Revert Edges, -ve cost
 	print_shortest_path(0);
 	printf("Afer Save Path 1\n");
-	reset_topology();
-	printf("After Reset\n");
-	modified_dijkstra(src); //Run djkstra on the Updated *node Graph	
-	printf("Afer Dijkstra 2\n");
-	save_path(src,dest,1);
-	printf("Afer Save Path 2\n");
-	print_shortest_path(1);
+
+	//Split Nodes.
+	split_node(src, dest);
+
+//	reset_topology();
+//	printf("After Reset\n");
+//	modified_dijkstra(src); //Run djkstra on the Updated *node Graph	
+//	printf("Afer Dijkstra 2\n");
+//	save_path(src,dest,1);
+//	printf("Afer Save Path 2\n");
+//	print_shortest_path(1);
 
         //print_path(src,dest);   
-	find_interlace();
-
-	//save path for all paths
-	printf("After Interlace\n");
-	print_shortest_path(0);
-	print_shortest_path(1);
+//	find_interlace();
+//	printf("After Interlace\n");
+//	print_shortest_path(0);
+//	print_shortest_path(1);
         for(i=0;i<total_nodes;i++)
         {
                 free(node[i].edge_cost);

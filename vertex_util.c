@@ -1,5 +1,42 @@
-#include "modified_dijkstra.h"
+#include "vertex_disjoint.h"
 
+
+void split_node(int src, int dest){
+	int i,j,split_cnt = 0;
+	int split_i = 0;
+
+
+	i = src;
+	//change .. find the count for no of nodes to be split
+	while(i != dest){
+		split_cnt++;
+		i = node[i].next_hop;
+	}
+
+	
+    	//first create node1!!
+        node1 = (Node *)malloc(sizeof(Node)*(total_nodes + split_cnt));
+	
+	//initialize *split structure using the count
+	split = (Split *)malloc(sizeof(Split) * split_cnt);
+        for(i = 0;i< total_nodes;i++){ //initialize node structure
+                split[i].edge_cost = (double *)malloc(sizeof(double) * total_nodes + split_cnt);
+                for(j = 0;j < total_nodes + split_cnt;j++)
+                        split[i].edge_cost[j] = INF;
+        }
+	
+
+
+
+
+	i = src;
+	//fill in the *split structure
+	while(i != dest){
+		i = node[i].next_hop;
+		
+	}
+
+}
 
 void print_shortest_path(int index){
 	int i;
@@ -233,41 +270,6 @@ void reset_topology(){
 }
 
 
-/*
-int main(int argc, char *argv[]){
-	int i;
-	total_nodes = -1;
-	int src,dest;
-	
-	if(argc != 4){
-		perror("Incorrect command line arguments\n");
-		exit(-1);
-	}
-	file = fopen(argv[1],"r");
-	initialize_topology();
-	src = atoi(argv[2])-1;
-	dest = atoi(argv[3])-1;
-//	for(i=0;i<total_nodes;i++)
-//	{
-	modified_dijkstra(src);
-	save_path(src,dest);
-//	reset_topology();
-//		printf("Time taken for source Node %d is : %.15lf microseconds\n",i+1,(double)(end.tv_usec-start.tv_usec + (end.tv_sec-start.tv_sec)));
-
-
-//	}
-
-	print_path(src,dest);	
-
-	for(i=0;i<total_nodes;i++)
-	{
-		free(node[i].edge_cost);
-//		free(node[i].saved_cost);
-//		free(node[i].next_hop);
-	}
-	free(node);
-}	
-*/
 void initialize_topology(){
 	int i,j;
 	if(!file){
@@ -308,47 +310,6 @@ void initialize_topology(){
 }
 
 
-void initialization()
-{
-	int k = 0;
-	int i;	
-	for(i=0;i<total_nodes;i++)
-        {
-                if(i!=k)
-                {
-                        if(node[k].edge_cost[i]!=INF){
-                                //printf("D[%d] = C(%d,%d) = %lf\n",i+1,k+1,i+1,node[k].edge_cost[i]);
-                                node[i].cost = node[k].edge_cost[i]; //initialize D(v) = c(u,v)
-                        }
-                        else{
-                                //printf("D[%d] = INFININTY\n",i+1);
-                                node[i].cost = INF;
-                        }
-                }
-                else{
-                        node[i].cost = 0.0f;
-                        //printf("D[%d] = 0\n",i+1);
-                }
-        }
-
-
-}
-/*void print_topology(int src)
-{
-	int k;
-	printf("\nRouting table of node %d -->\n\n",src);
-        printf("  Destination\t  Next Hop \tCost to Destination\n");
-        printf("---------------------------------------------------\n");
-
-        for(k = 0;k < total_nodes; k++){
-                       // if(node[i].edge_cost[k]!=0)
-                        //if(node[k].cost!=999999)
-                        printf("  %d\t\t  %d   \t\t\t   %.2lf\n",k+1,node[src-1].next_hop[k]+1,node[src-1].saved_cost[k]);
-                        //else
-                        //printf("  %d\t  %d\tINFINITY\n",src,k+1);
-        }
-
-}*/
 
 int all_flags_set()
 {
