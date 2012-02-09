@@ -15,7 +15,7 @@ typedef struct node_{
 	int flag; //denotes whether node's distance to src is permanent or can change
 	double cost; // length of node to source
 	int next_hop;
-	int split_index[2];
+	//int split_index[2];
 }Node;
 
 typedef struct path_edge_{
@@ -34,8 +34,8 @@ Node *node,*node1;
 Path **path;
 FILE *file;
 int total_nodes;
+int split_cnt;
 
 void initialize_topology();
 void print_topology(int);
-void link_state(int, char);
 void initialization();

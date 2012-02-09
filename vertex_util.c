@@ -1,40 +1,109 @@
 #include "vertex_disjoint.h"
 
 
-void split_node(int src, int dest){
-	int i,j,split_cnt = 0;
-	int split_i = 0;
-
-
+void reverse_and_negate(int src, int dest){
+	int i,j;
 	i = src;
+	while(i!=dest){
+		j = node[i].next_hop;
+		node[j].edge_cost[i] = -node[i].edge_cost[j];
+		node[i].edge_cost[j] = INF;
+	}
+
+	node1[split[0].node1_index[0]].edge_cost[src] = -node1[src].edge_cost[split[0].node1_index[0]];
+	node1[src].edge_cost[split[0].node1_index[0]] = INF;
+	for(i=0;i<split_cnt;i++){
+		node1[split[i].node1_index[1]].edge_cost[split[i].node1_index[0]] = -node1[split[i].node1_index[0]].edge_cost[split[i].node1_index[1]] ;
+		node1[split[i].node1_index[0]].edge_cost[split[i].node1_index[1]] = INF;
+		
+		if(i!=split_cnt - 1){
+			node1[split[i+1].node1_index[0]].edge_cost[split[i].node1_index[1]] = -node1[split[i].node1_index[1]].edge_cost[split[i+1].node1_index[0]];
+			node1[split[i].node1_index[1]].edge_cost[split[i+1].node1_index[0]] = INF;
+		}
+	}
+	node1[split[split_cnt - 1].node1_index[1]].edge_cost[dest] = -node1[dest].edge_cost[split[split_cnt - 1].node1_index[1]];
+	node1[dest].edge_cost[split[split_cnt - 1].node1_index[1]] = INF;
+
+}
+
+int check_split_array(int node_index){
+	int i;
+	for(i=0;i<split_cnt;i++){
+		if(split[i].node1_index[0] == node_index)
+			return 1;
+	}
+	return 0;
+}
+
+void copy_node(int check_value, int node_index){
+	int i;
+	 node1[node_index].cost = node[node_index].cost;
+         node1[node_index].pred = node[node_index].pred;
+         node1[node_index].flag = node[node_index].flag;
+         node1[node_index].next_hop = node[node_index].next_hop;
+           
+	if(check_value == 0){ //copy node -> node1
+		for(i = 0;i<total_nodes;i++){
+			node1[node_index].edge_cost[i] = node[node_index].edge_cost[i];
+		}
+	}
+	else{
+	        node1[node_index + total_nodes].cost = node[node_index].cost;
+                node1[node_index + total_nodes].pred = node[node_index].pred;
+                node1[node_index + total_nodes].flag = node[node_index].flag;
+                node1[node_index + total_nodes].next_hop = node[node_index].next_hop;
+       	     	for(i = 0;i<total_nodes;i++){
+                        node1[node_index + total_nodes].edge_cost[i] = node[node_index].edge_cost[i];
+                }
+		node1[node_index].edge_cost[node_index + total_nodes] = 0;
+	}
+	
+}
+void split_node(int src, int dest){
+	int i,j;
+	int split_i = 0;
+	int *temp_indexes,temp;
+
+
+	temp_indexes = (int *) malloc(sizeof(int)*(total_nodes-2));
+
+	i = node[src].next_hop;
+	temp = 0;
 	//change .. find the count for no of nodes to be split
 	while(i != dest){
 		split_cnt++;
+		temp_indexes[temp++] = i;
 		i = node[i].next_hop;
 	}
 
 	
     	//first create node1!!
         node1 = (Node *)malloc(sizeof(Node)*(total_nodes + split_cnt));
-	
+	for(i = 0;i < total_nodes + split_cnt;i++){
+		node1[i].edge_cost = (double *)malloc(sizeof(double)*(total_nodes + split_cnt));
+		for(j=0;j<split_cnt + total_nodes;j++){
+			node1[i].edge_cost[j] = INF;
+		}
+	}
 	//initialize *split structure using the count
 	split = (Split *)malloc(sizeof(Split) * split_cnt);
-        for(i = 0;i< total_nodes;i++){ //initialize node structure
-                split[i].edge_cost = (double *)malloc(sizeof(double) * total_nodes + split_cnt);
-                for(j = 0;j < total_nodes + split_cnt;j++)
-                        split[i].edge_cost[j] = INF;
+	
+        for(i = 0;i< split_cnt;i++){ //initialize node structure
+		split[i].node1_index[0] = temp_indexes[i]; //A - 1A
+		split[i].node1_index[1] = total_nodes + i -1; //B
+             //   split[i].edge_cost = (double *)malloc(sizeof(double) * total_nodes + split_cnt);
+              //  for(j = 0;j < total_nodes + split_cnt;j++)
+                //        split[i].edge_cost[j] = INF;
         }
 	
-
-
-
-
-	i = src;
-	//fill in the *split structure
-	while(i != dest){
-		i = node[i].next_hop;
-		
+	free(temp_indexes);
+	
+	//building *node1
+	for(i=0;total_nodes;i++){
+		copy_node(check_split_array(i),i);
 	}
+	
+
 
 }
 
@@ -103,7 +172,7 @@ void find_interlace(){
 }
 
 
-void save_path_1(int src,int dest,int flag){
+void save_path_1(int src,int dest,int flag, Node *node){
         int i,j,cost=0;
 
         i = dest;
@@ -163,108 +232,11 @@ void save_path_1(int src,int dest,int flag){
 }
 
 
-void save_path(int src,int dest,int flag){
-	int i,j,cost=0;
-	
-	i = dest;	
-
-	while(i!=src)
-	{
-		j = node[i].pred;
-		node[j].next_hop = i;
-		cost+=node[j].edge_cost[i];
-		i = j;
-	}
-	node[i].cost = cost;
-
-	//original function to print path using node structure
-	print_path(src,dest);
-
-	Path *temp,*p;
-	int next_hop = node[src].next_hop;
-	temp = malloc(sizeof(Path));
-	temp->nodes[0] = src;
-	temp->nodes[1] = next_hop;
-	temp->cost = node[src].edge_cost[next_hop];
-	path[flag] = temp; //head
-	if(flag == 0){
-		printf("First in Save Path\n");
-		node[src].edge_cost[next_hop] = INF;
-		if(node[next_hop].edge_cost[src]!=INF)
-			node[next_hop].edge_cost[src] = -node[next_hop].edge_cost[src];
-		printf("For %d-%d Zeroed Cost: %.2f  -- Negated Cost: %.2f\n",src+1,next_hop+1,node[src].edge_cost[next_hop],node[next_hop].edge_cost[src]);
-
-	}
-	else{  //revert Edges
-		printf("Second in Save Path\n");
-		if(node[next_hop].edge_cost[src]!=INF)
-			node[next_hop].edge_cost[src] = -node[next_hop].edge_cost[src];
-		node[src].edge_cost[next_hop] = node[next_hop].edge_cost[src];
-		printf("For %d-%d Original Cost: %.2f  -- Original Cost: %.2f\n",src+1,next_hop+1,node[src].edge_cost[next_hop],node[next_hop].edge_cost[src]);
-
-	}
-
-	//j = src;
-	i = next_hop;
-	p = temp;
-	//while(node[i].next_hop!=dest){
-	while(i!=dest){
-		//printf("Here\n");
-		next_hop = node[i].next_hop;
-		temp = malloc(sizeof(Path));
-		temp->nodes[0] = i;
-		temp->nodes[1] = next_hop;
-		temp->cost = node[i].edge_cost[next_hop];
-		temp->next = NULL;
-		if(flag == 0){
-                	node[i].edge_cost[next_hop] = INF;
-	                node[next_hop].edge_cost[i] = -node[next_hop].edge_cost[i];
-        		printf("For %d-%d Zeroed Cost: %.2f  -- Negated Cost: %.2f\n",i+1,next_hop+1,node[i].edge_cost[next_hop],node[next_hop].edge_cost[i]);
-		}
-	        else{  //revert Edges
-                	node[next_hop].edge_cost[i] = -node[next_hop].edge_cost[i];
-        	        node[i].edge_cost[next_hop] = node[next_hop].edge_cost[i];
-			printf("For %d-%d Original Cost: %.2f  -- Original Cost: %.2f\n",i+1,next_hop+1,node[i].edge_cost[next_hop],node[next_hop].edge_cost[i]);
-
-	        }
-		
-		p->next = temp;
-		p = p->next;
-		//j = i;
-		i = next_hop;
-	}
-
-
-/*
-	for(i=0;i<total_nodes;i++)
-	{
-		//printf("Pred for %d is: %d\n",i+1,node[i].pred+1);
-		if(i!=current_node - 1){
-			//node[current_node - 1].saved_cost
-			k = i;
-			j = node[i].pred;
-		
-			while(j!=current_node-1){
-				k = j;
-				j = node[j].pred;
-			}	
-			node[current_node - 1].next_hop[i] = k;
-			node[current_node - 1].saved_cost[i] = node[i].cost;	
-		}
-		else{
-			node[current_node - 1].next_hop[i] = i;
-			node[current_node - 1].saved_cost[i] = 0.0f;
-		}	
-	}
-*/	
-}
-
-
-void reset_topology(){
+void reset_topology(Node *topology, int total_nodes){
 	int i;
 	for(i=0;i<total_nodes;i++){
-		node[i].flag = 0;
-		node[i].pred = i;
+		topology[i].flag = 0;
+		topology[i].pred = i;
 	}
 	
 }
@@ -311,18 +283,18 @@ void initialize_topology(){
 
 
 
-int all_flags_set()
+int all_flags_set(Node *topology, int total_nodes)
 {
 	int i;
 	for(i=0;i<total_nodes;i++)
 	{	
-		if(node[i].flag==0)
+		if(topology[i].flag==0)
 			return 0;
 	}
 	return 1;
 }
 
-int modified_dijkstra(int src){
+int modified_dijkstra(int src, Node *node, int total_nodes){
 	
 	int i,k;
 	double min;
@@ -382,7 +354,7 @@ int modified_dijkstra(int src){
 
                 }
 
-        }while(!all_flags_set());
+        }while(!all_flags_set(node, total_nodes));
 	
 }
 
