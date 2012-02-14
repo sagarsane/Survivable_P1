@@ -19,25 +19,27 @@ int main(int argc, char *argv[]){
 	//Edge Disjoint Steps
 	//printf("Before\n");
         modified_dijkstra(src); //Source to Dest Path
-	printf("Afer Dijkstra 1\n");
+	//printf("Afer Dijkstra 1\n");
 	save_path(src,dest,0); //Save Path, Revert Edges, -ve cost
-	print_shortest_path(0);
-	printf("Afer Save Path 1\n");
+	//print_shortest_path(0);
+	//printf("Afer Save Path 1\n");
 	reset_topology();
-	printf("After Reset\n");
+	//printf("After Reset\n");
 	modified_dijkstra(src); //Run djkstra on the Updated *node Graph	
-	printf("Afer Dijkstra 2\n");
+	//printf("Afer Dijkstra 2\n");
 	save_path(src,dest,1);
-	printf("Afer Save Path 2\n");
-	print_shortest_path(1);
+	//printf("Afer Save Path 2\n");
+	//print_shortest_path(1);
 
         //print_path(src,dest);   
 	find_interlace();
 
 	//save path for all paths
-	printf("After Interlace\n");
+	//printf("After Interlace\n");
+	printf("Src: %d, Dest: %d ->\n",src + 1,dest + 1);
 	print_shortest_path(0);
 	print_shortest_path(1);
+	printf("\n");
         for(i=0;i<total_nodes;i++)
         {
                 free(node[i].edge_cost);

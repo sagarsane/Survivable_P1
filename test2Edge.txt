@@ -1,0 +1,444 @@
+Src: 7, Dest: 1 ->
+Path 1 is:	7	33	46	26	48	17	1
+Its Cost is: 1976.20
+Path 2 is:	7	9	44	59	15	67	18	1
+Its Cost is: 2244.50
+
+Src: 7, Dest: 2 ->
+Path 1 is:	7	33	46	26	48	17	49	2
+Its Cost is: 2336.80
+Path 2 is:	7	9	44	59	15	67	18	1	24	2
+Its Cost is: 2735.20
+
+Src: 7, Dest: 3 ->
+Path 1 is:	7	33	46	26	69	21	3
+Its Cost is: 2242.50
+Path 2 is:	7	9	64	58	48	17	49	2	25	3
+Its Cost is: 2988.00
+
+Src: 7, Dest: 4 ->
+Path 1 is:	7	6	35	34	13	56	41	70	4
+Its Cost is: 963.90
+Path 2 is:	7	54	62	61	14	40	4
+Its Cost is: 969.50
+
+Src: 7, Dest: 5 ->
+Path 1 is:	7	9	64	45	16	5
+Its Cost is: 1244.90
+Path 2 is:	7	6	35	34	13	36	65	63	5
+Its Cost is: 1338.60
+
+Src: 7, Dest: 6 ->
+Path 1 is:	7	6
+Its Cost is: 19.10
+Path 2 is:	7	9	34	35	6
+Its Cost is: 825.90
+
+Src: 7, Dest: 8 ->
+Path 1 is:	7	6	35	42	8
+Its Cost is: 339.20
+Path 2 is:	7	54	55	57	8
+Its Cost is: 619.00
+
+Src: 7, Dest: 9 ->
+Path 1 is:	7	9
+Its Cost is: 300.20
+Path 2 is:	7	6	35	34	9
+Its Cost is: 544.80
+
+Src: 7, Dest: 10 ->
+Path 1 is:	7	6	35	34	13	56	41	70	4	72	10
+Its Cost is: 1375.40
+Path 2 is:	7	9	64	45	16	5	10
+Its Cost is: 1516.50
+
+Src: 7, Dest: 11 ->
+Path 1 is:	7	6	12	11
+Its Cost is: 882.80
+Path 2 is:	7	54	62	61	11
+Its Cost is: 885.10
+
+Src: 7, Dest: 12 ->
+Path 1 is:	7	6	12
+Its Cost is: 872.10
+Path 2 is:	7	54	62	61	11	12
+Its Cost is: 895.80
+
+Src: 7, Dest: 13 ->
+Path 1 is:	7	6	35	34	13
+Its Cost is: 387.50
+Path 2 is:	7	54	62	56	13
+Its Cost is: 827.90
+
+Src: 7, Dest: 14 ->
+Path 1 is:	7	54	62	61	14
+Its Cost is: 821.00
+Path 2 is:	7	6	12	47	14
+Its Cost is: 970.20
+
+Src: 7, Dest: 15 ->
+Path 1 is:	7	9	64	45	15
+Its Cost is: 1283.50
+Path 2 is:	7	33	46	44	59	15
+Its Cost is: 1248.00
+
+Src: 7, Dest: 16 ->
+Path 1 is:	7	9	64	45	16
+Its Cost is: 1076.30
+Path 2 is:	7	6	35	34	13	36	65	63	5	16
+Its Cost is: 1507.20
+
+Src: 7, Dest: 17 ->
+Path 1 is:	7	33	46	26	48	17
+Its Cost is: 1814.50
+Path 2 is:	7	9	44	59	15	67	18	1	17
+Its Cost is: 2406.20
+
+Src: 7, Dest: 18 ->
+Path 1 is:	7	33	46	26	48	17	1	18
+Its Cost is: 2104.00
+Path 2 is:	7	9	44	59	15	67	18
+Its Cost is: 2116.70
+
+Src: 7, Dest: 19 ->
+Path 1 is:	7	33	46	26	69	21	20	23	19
+Its Cost is: 2739.40
+Path 2 is:	7	9	64	58	48	17	1	24	19
+Its Cost is: 2670.70
+
+Src: 7, Dest: 20 ->
+Path 1 is:	7	33	46	26	69	21	20
+Its Cost is: 2532.00
+Path 2 is:	7	9	64	58	48	17	1	24	19	23	20
+Its Cost is: 2878.10
+
+Src: 7, Dest: 21 ->
+Path 1 is:	7	33	46	26	69	21
+Its Cost is: 2234.10
+Path 2 is:	7	9	64	58	48	17	49	2	25	3	21
+Its Cost is: 2996.40
+
+Src: 7, Dest: 22 ->
+Path 1 is:	7	33	46	26	69	73	74	60	22
+Its Cost is: 3217.10
+Path 2 is:	7	9	64	58	48	17	49	2	25	3	21	3	22
+Its Cost is: 3076.70
+
+Src: 7, Dest: 23 ->
+Path 1 is:	7	33	46	26	69	21	20	23
+Its Cost is: 2691.40
+Path 2 is:	7	9	64	58	48	17	1	24	19	23
+Its Cost is: 2718.70
+
+Src: 7, Dest: 24 ->
+Path 1 is:	7	33	46	26	48	17	49	2	24
+Its Cost is: 2469.60
+Path 2 is:	7	9	44	59	15	67	18	1	24
+Its Cost is: 2602.40
+
+Src: 7, Dest: 25 ->
+Path 1 is:	7	33	46	26	69	21	3	25
+Its Cost is: 2293.00
+Path 2 is:	7	9	64	58	48	17	49	2	25
+Its Cost is: 2937.50
+
+Src: 7, Dest: 26 ->
+Path 1 is:	7	33	46	26
+Its Cost is: 1081.60
+Path 2 is:	7	9	64	58	48	26
+Its Cost is: 2108.60
+
+Src: 7, Dest: 27 ->
+Path 1 is:	7	6	12	27
+Its Cost is: 965.00
+Path 2 is:	7	54	55	51	52	50	39	38	27
+Its Cost is: 1265.10
+
+Src: 7, Dest: 28 ->
+Path 1 is:	7	6	35	34	13	36	65	63	28
+Its Cost is: 1413.40
+Path 2 is:	7	9	64	45	16	5	31	32	29	30	28
+Its Cost is: 2621.20
+
+Src: 7, Dest: 29 ->
+Path 1 is:	7	6	35	34	13	36	65	63	28	30	29
+Its Cost is: 1804.80
+Path 2 is:	7	9	64	45	16	5	31	32	29
+Its Cost is: 2229.80
+
+Src: 7, Dest: 30 ->
+Path 1 is:	7	6	35	34	13	36	65	63	28	30
+Its Cost is: 1561.90
+Path 2 is:	7	9	64	45	16	5	31	32	29	30
+Its Cost is: 2472.70
+
+Src: 7, Dest: 31 ->
+Path 1 is:	7	9	64	45	16	5	31
+Its Cost is: 1584.70
+Path 2 is:	7	33	46	44	59	15	68	37	31
+Its Cost is: 2108.60
+
+Src: 7, Dest: 32 ->
+Path 1 is:	7	9	64	45	16	5	31	32
+Its Cost is: 1989.60
+Path 2 is:	7	6	35	34	13	36	65	63	28	30	29	32
+Its Cost is: 2045.00
+
+Src: 7, Dest: 33 ->
+Path 1 is:	7	33
+Its Cost is: 352.10
+Path 2 is:	7	9	44	46	33
+Its Cost is: 941.40
+
+Src: 7, Dest: 34 ->
+Path 1 is:	7	6	35	34
+Its Cost is: 268.70
+Path 2 is:	7	9	34
+Its Cost is: 576.30
+
+Src: 7, Dest: 35 ->
+Path 1 is:	7	6	35
+Its Cost is: 110.50
+Path 2 is:	7	9	34	35
+Its Cost is: 734.50
+
+Src: 7, Dest: 36 ->
+Path 1 is:	7	6	35	34	13	36
+Its Cost is: 494.10
+Path 2 is:	7	9	64	65	36
+Its Cost is: 1006.50
+
+Src: 7, Dest: 37 ->
+Path 1 is:	7	9	44	59	15	68	37
+Its Cost is: 1773.80
+Path 2 is:	7	6	35	34	13	36	65	63	5	31	37
+Its Cost is: 1887.90
+
+Src: 7, Dest: 38 ->
+Path 1 is:	7	6	12	27	38
+Its Cost is: 1100.40
+Path 2 is:	7	54	55	51	52	50	39	38
+Its Cost is: 1129.70
+
+Src: 7, Dest: 39 ->
+Path 1 is:	7	54	55	51	52	50	39
+Its Cost is: 1107.20
+Path 2 is:	7	6	12	27	38	39
+Its Cost is: 1122.90
+
+Src: 7, Dest: 40 ->
+Path 1 is:	7	6	35	34	13	56	41	40
+Its Cost is: 924.70
+Path 2 is:	7	54	62	61	14	40
+Its Cost is: 927.00
+
+Src: 7, Dest: 41 ->
+Path 1 is:	7	6	35	34	13	56	41
+Its Cost is: 903.20
+Path 2 is:	7	54	62	61	14	40	41
+Its Cost is: 948.50
+
+Src: 7, Dest: 42 ->
+Path 1 is:	7	6	35	42
+Its Cost is: 241.90
+Path 2 is:	7	54	55	57	8	42
+Its Cost is: 716.30
+
+Src: 7, Dest: 43 ->
+Path 1 is:	7	6	75	43
+Its Cost is: 473.20
+Path 2 is:	7	33	46	43
+Its Cost is: 862.80
+
+Src: 7, Dest: 44 ->
+Path 1 is:	7	9	44
+Its Cost is: 584.10
+Path 2 is:	7	33	46	44
+Its Cost is: 709.40
+
+Src: 7, Dest: 45 ->
+Path 1 is:	7	9	64	45
+Its Cost is: 820.40
+Path 2 is:	7	33	46	44	59	15	45
+Its Cost is: 1711.10
+
+Src: 7, Dest: 46 ->
+Path 1 is:	7	33	46
+Its Cost is: 509.70
+Path 2 is:	7	9	44	46
+Its Cost is: 783.80
+
+Src: 7, Dest: 47 ->
+Path 1 is:	7	54	62	61	14	47
+Its Cost is: 860.10
+Path 2 is:	7	6	12	47
+Its Cost is: 931.10
+
+Src: 7, Dest: 48 ->
+Path 1 is:	7	33	46	26	48
+Its Cost is: 1479.30
+Path 2 is:	7	9	64	58	48
+Its Cost is: 1710.90
+
+Src: 7, Dest: 49 ->
+Path 1 is:	7	33	46	26	48	17	49
+Its Cost is: 2063.60
+Path 2 is:	7	9	44	59	15	67	18	1	24	2	49
+Its Cost is: 3008.40
+
+Src: 7, Dest: 50 ->
+Path 1 is:	7	54	55	51	52	50
+Its Cost is: 961.60
+Path 2 is:	7	6	12	11	53	50
+Its Cost is: 1053.10
+
+Src: 7, Dest: 51 ->
+Path 1 is:	7	54	55	51
+Its Cost is: 646.60
+Path 2 is:	7	6	12	11	53	50	52	51
+Its Cost is: 1368.10
+
+Src: 7, Dest: 52 ->
+Path 1 is:	7	54	55	51	52
+Its Cost is: 812.60
+Path 2 is:	7	6	12	11	53	50	52
+Its Cost is: 1202.10
+
+Src: 7, Dest: 53 ->
+Path 1 is:	7	6	12	11	53
+Its Cost is: 918.50
+Path 2 is:	7	54	55	51	52	50	53
+Its Cost is: 1096.20
+
+Src: 7, Dest: 54 ->
+Path 1 is:	7	54
+Its Cost is: 404.00
+Path 2 is:	7	6	35	42	8	57	55	54
+Its Cost is: 554.20
+
+Src: 7, Dest: 55 ->
+Path 1 is:	7	54	55
+Its Cost is: 440.10
+Path 2 is:	7	6	35	42	8	57	55
+Its Cost is: 518.10
+
+Src: 7, Dest: 56 ->
+Path 1 is:	7	6	35	34	13	56
+Its Cost is: 507.80
+Path 2 is:	7	54	62	56
+Its Cost is: 707.60
+
+Src: 7, Dest: 57 ->
+Path 1 is:	7	6	35	42	8	57
+Its Cost is: 402.70
+Path 2 is:	7	54	55	57
+Its Cost is: 555.50
+
+Src: 7, Dest: 58 ->
+Path 1 is:	7	9	64	58
+Its Cost is: 1092.30
+Path 2 is:	7	33	46	26	48	58
+Its Cost is: 2097.90
+
+Src: 7, Dest: 59 ->
+Path 1 is:	7	9	64	45	15	59
+Its Cost is: 1563.50
+Path 2 is:	7	33	46	44	59
+Its Cost is: 968.00
+
+Src: 7, Dest: 60 ->
+Path 1 is:	7	33	46	26	69	73	74	60
+Its Cost is: 2632.50
+Path 2 is:	7	9	64	58	48	17	49	2	25	3	22	60
+Its Cost is: 3661.30
+
+Src: 7, Dest: 61 ->
+Path 1 is:	7	54	62	61
+Its Cost is: 710.30
+Path 2 is:	7	6	12	11	61
+Its Cost is: 1057.60
+
+Src: 7, Dest: 62 ->
+Path 1 is:	7	54	62
+Its Cost is: 513.50
+Path 2 is:	7	6	35	34	13	56	62
+Its Cost is: 701.90
+
+Src: 7, Dest: 63 ->
+Path 1 is:	7	6	35	34	13	36	65	63
+Its Cost is: 1106.20
+Path 2 is:	7	9	64	45	16	5	63
+Its Cost is: 1477.30
+
+Src: 7, Dest: 64 ->
+Path 1 is:	7	9	64
+Its Cost is: 586.60
+Path 2 is:	7	6	35	34	13	36	65	64
+Its Cost is: 914.00
+
+Src: 7, Dest: 65 ->
+Path 1 is:	7	6	35	34	13	36	65
+Its Cost is: 678.10
+Path 2 is:	7	9	64	65
+Its Cost is: 822.50
+
+Src: 7, Dest: 66 ->
+Path 1 is:	7	9	64	45	15	68	66
+Its Cost is: 1729.30
+Path 2 is:	7	33	46	44	59	15	67	66
+Its Cost is: 1491.40
+
+Src: 7, Dest: 67 ->
+Path 1 is:	7	9	64	45	15	68	66	67
+Its Cost is: 1934.20
+Path 2 is:	7	33	46	44	59	15	67
+Its Cost is: 1286.50
+
+Src: 7, Dest: 68 ->
+Path 1 is:	7	9	64	45	15	67	66	68
+Its Cost is: 1703.60
+Path 2 is:	7	33	46	44	59	15	68
+Its Cost is: 1517.10
+
+Src: 7, Dest: 69 ->
+Path 1 is:	7	33	46	26	69
+Its Cost is: 1525.30
+Path 2 is:	7	9	64	58	48	17	49	2	25	3	21	69
+Its Cost is: 3705.20
+
+Src: 7, Dest: 70 ->
+Path 1 is:	7	6	35	34	13	56	41	70
+Its Cost is: 958.70
+Path 2 is:	7	54	62	61	14	40	4	70
+Its Cost is: 974.70
+
+Src: 7, Dest: 71 ->
+Path 1 is:	7	6	35	34	13	56	41	40	71
+Its Cost is: 1128.40
+Path 2 is:	7	9	64	65	63	71
+Its Cost is: 1648.90
+
+Src: 7, Dest: 72 ->
+Path 1 is:	7	6	35	34	13	56	41	70	4	72
+Its Cost is: 1086.10
+Path 2 is:	7	9	64	45	16	5	10	72
+Its Cost is: 1805.80
+
+Src: 7, Dest: 73 ->
+Path 1 is:	7	33	46	26	69	73
+Its Cost is: 2182.00
+Path 2 is:	7	9	64	58	48	17	49	2	25	3	22	60	74	73
+Its Cost is: 4111.80
+
+Src: 7, Dest: 74 ->
+Path 1 is:	7	33	46	26	69	73	74
+Its Cost is: 2457.00
+Path 2 is:	7	9	64	58	48	17	49	2	25	3	22	60	74
+Its Cost is: 3836.80
+
+Src: 7, Dest: 75 ->
+Path 1 is:	7	6	75
+Its Cost is: 116.10
+Path 2 is:	7	33	46	43	75
+Its Cost is: 1219.90
+
