@@ -1,5 +1,22 @@
 #include "vertex_disjoint.h"
 
+void print_shortest_path(int index){
+        int i;
+        double cost = 0.0f;
+        Path *p;
+        p = path[index];
+        printf("Path %d is:",index+1);
+        while(p!=NULL){
+                if(p->next != NULL)
+                        printf("\t%d",p->nodes[0]+1);
+                else
+                        printf("\t%d\t%d",p->nodes[0]+1,p->nodes[1]+1);
+                cost += p->cost;
+                p = p->next;
+        }
+        printf("\nIts Cost is: %.2f\n",cost);
+}
+
 int check_pred(int index){
 	int i;
 	for(i=0;i<split_cnt;i++){
@@ -118,7 +135,7 @@ void split_node(int src, int dest){
 		i = node[i].next_hop;
 	}
 
-	printf("Split Cnt: %d\n",split_cnt);	
+	//printf("Split Cnt: %d\n",split_cnt);	
     	//first create node1!!
         node1 = (Node *)malloc(sizeof(Node)*(total_nodes + split_cnt));
 	for(i = 0;i < total_nodes + split_cnt;i++){
@@ -149,7 +166,7 @@ void split_node(int src, int dest){
 
 }
 
-void print_shortest_path(int index){
+/*void print_shortest_path(int index){
 	int i;
 	double cost = 0.0f;
 	Path *p;
@@ -161,7 +178,7 @@ void print_shortest_path(int index){
 		p = p->next;
 	}
 	printf("\nIts Cost is: %.2f\n",cost);
-}
+}*/
 
 
 void print_path(int src, int dest)
@@ -175,6 +192,7 @@ void print_path(int src, int dest)
         }
         printf("\nThe cost of the path is: %.2lf\n\n",node[src].cost);
 }
+
 
 void find_interlace(){
 	
@@ -190,7 +208,7 @@ void find_interlace(){
 		while(q!=NULL){
 			if((p->nodes[0] == q->nodes[0] && p->nodes[1] == q->nodes[1]) || (p->nodes[0] == q->nodes[1] && p->nodes[1] == q->nodes[0])){ 
 				//interlace found
-				printf("Interlace Found for Edges: %d-%d \t %d-%d\n",p->nodes[0]+1,p->nodes[1]+1,q->nodes[0]+1,q->nodes[1]+1);
+				//printf("Interlace Found for Edges: %d-%d \t %d-%d\n",p->nodes[0]+1,p->nodes[1]+1,q->nodes[0]+1,q->nodes[1]+1);
 				pslow->next = q->next;
 				qslow->next = p->next;
 				q = qslow->next;
@@ -306,9 +324,9 @@ void initialize_topology(){
 	node = (Node *)malloc(sizeof(Node)*total_nodes);
 
 	//change
-	printf("Before Initializing Path\n");	
+	//printf("Before Initializing Path\n");	
 	path = (Path **)malloc(sizeof(Path *) * 2);
-	printf("Path Initialized\n");
+	//printf("Path Initialized\n");
 	for(i = 0;i< total_nodes;i++){ //initialize node structure
 		node[i].edge_cost = (double *)malloc(sizeof(double) * total_nodes);
 		//node[i].next_hop = (int *)malloc(sizeof(int) * total_nodes);
@@ -353,7 +371,7 @@ int modified_dijkstra(int src, Node *node, int total_nodes){
 	k=src;
         //node[src-1].cost=0.0f;
         node[k].flag=1;
-	printf("Total Nodes: %d\n",total_nodes);
+	//printf("Total Nodes: %d\n",total_nodes);
 	for(i=0;i<total_nodes;i++)
 	{
 		if(i!=k)
@@ -374,7 +392,7 @@ int modified_dijkstra(int src, Node *node, int total_nodes){
 			//printf("D[%d] = 0\n",i+1);
 		}
 	}
-	printf("Before DO\n");
+	//printf("Before DO\n");
         do
         {
 	        min=INF;
