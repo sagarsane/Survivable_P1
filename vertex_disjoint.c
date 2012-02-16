@@ -51,6 +51,7 @@ int main(int argc, char *argv[]){
 	printf("Src: %d, Dest: %d ->\n",src + 1,dest + 1);
 	print_shortest_path(0);
 	print_shortest_path(1);
+	printf("\n");
 }       
 
 
