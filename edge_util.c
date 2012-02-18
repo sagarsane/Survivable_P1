@@ -45,7 +45,7 @@ void find_interlace(){
 		while(q!=NULL){
 			if((p->nodes[0] == q->nodes[0] && p->nodes[1] == q->nodes[1]) || (p->nodes[0] == q->nodes[1] && p->nodes[1] == q->nodes[0])){ 
 				//interlace found
-				//printf("Interlace Found for Edges: %d-%d \t %d-%d\n",p->nodes[0]+1,p->nodes[1]+1,q->nodes[0]+1,q->nodes[1]+1);
+				printf("Interlace Found for Edges: %d-%d \t %d-%d\n",p->nodes[0]+1,p->nodes[1]+1,q->nodes[0]+1,q->nodes[1]+1);
 				pslow->next = q->next;
 				qslow->next = p->next;
 				q = qslow->next;
@@ -68,65 +68,6 @@ void find_interlace(){
 
 }
 
-
-void save_path_1(int src,int dest,int flag){
-        int i,j,cost=0;
-
-        i = dest;
-
-        while(i!=src)
-        {
-                j = node[i].pred;
-                node[j].next_hop = i;
-                cost+=node[j].edge_cost[i];
-                i = j;
-        }
-        node[i].cost = cost;
-
-        //original function to print path using node structure
-        //print_path(src,dest);
-
-        Path *temp,*p;
-        int next_hop = node[src].next_hop;
-        temp = malloc(sizeof(Path));
-        temp->nodes[0] = src;
-        temp->nodes[1] = next_hop;
-        temp->cost = node[src].edge_cost[next_hop];
-        path[flag] = temp; //head
-        if(flag == 0){
-               //printf("First in Save Path\n");
-                node[next_hop].edge_cost[src] = INF;
-
-        }
-        else{  //revert Edges
-                //printf("Second in Save Path\n");
-                node[next_hop].edge_cost[src] = node[src].edge_cost[next_hop];
-
-        }
-
-        i = next_hop;
-        p = temp;
-        while(i!=dest){
-                next_hop = node[i].next_hop;
-                temp = malloc(sizeof(Path));
-                temp->nodes[0] = i;
-                temp->nodes[1] = next_hop;
-                temp->cost = node[i].edge_cost[next_hop];
-                temp->next = NULL;
-                if(flag == 0){
-                        node[next_hop].edge_cost[i] = INF;
-                }
-                else{  //revert Edges
-                        node[next_hop].edge_cost[i] = node[i].edge_cost[next_hop];
-                }
-
-                p->next = temp;
-                p = p->next;
-                //j = i;
-                i = next_hop;
-        }
-                          
-}
 
 
 void save_path(int src,int dest,int flag){
@@ -152,77 +93,55 @@ void save_path(int src,int dest,int flag){
 	temp->nodes[0] = src;
 	temp->nodes[1] = next_hop;
 	temp->cost = node[src].edge_cost[next_hop];
+	//temp->cost = node[src].cost;
 	path[flag] = temp; //head
 	if(flag == 0){
-		//printf("First in Save Path\n");
+		  //    temp->cost = node[src].edge_cost[next_hop];
+
 		node[src].edge_cost[next_hop] = INF;
 		if(node[next_hop].edge_cost[src]!=INF)
 			node[next_hop].edge_cost[src] = -node[next_hop].edge_cost[src];
-		//printf("For %d-%d Zeroed Cost: %.2f  -- Negated Cost: %.2f\n",src+1,next_hop+1,node[src].edge_cost[next_hop],node[next_hop].edge_cost[src]);
 
 	}
 	else{  //revert Edges
-		//printf("Second in Save Path\n");
 		if(node[next_hop].edge_cost[src]!=INF)
 			node[next_hop].edge_cost[src] = -node[next_hop].edge_cost[src];
 		node[src].edge_cost[next_hop] = node[next_hop].edge_cost[src];
-		//printf("For %d-%d Original Cost: %.2f  -- Original Cost: %.2f\n",src+1,next_hop+1,node[src].edge_cost[next_hop],node[next_hop].edge_cost[src]);
+		 //     temp->cost = node[src].edge_cost[next_hop];
 
 	}
 
 	//j = src;
 	i = next_hop;
 	p = temp;
-	//while(node[i].next_hop!=dest){
 	while(i!=dest){
-		//printf("Here\n");
 		next_hop = node[i].next_hop;
 		temp = malloc(sizeof(Path));
 		temp->nodes[0] = i;
 		temp->nodes[1] = next_hop;
 		temp->cost = node[i].edge_cost[next_hop];
+		//temp->cost = node[i].cost;
 		temp->next = NULL;
 		if(flag == 0){
+	        //      temp->cost = node[i].edge_cost[next_hop];
                 	node[i].edge_cost[next_hop] = INF;
-	                node[next_hop].edge_cost[i] = -node[next_hop].edge_cost[i];
-        		//printf("For %d-%d Zeroed Cost: %.2f  -- Negated Cost: %.2f\n",i+1,next_hop+1,node[i].edge_cost[next_hop],node[next_hop].edge_cost[i]);
+			 if(node[next_hop].edge_cost[i]!=INF)
+		                node[next_hop].edge_cost[i] = -node[next_hop].edge_cost[i];
 		}
 	        else{  //revert Edges
-                	node[next_hop].edge_cost[i] = -node[next_hop].edge_cost[i];
+			 if(node[next_hop].edge_cost[i]!=INF)
+	                	node[next_hop].edge_cost[i] = -node[next_hop].edge_cost[i];
         	        node[i].edge_cost[next_hop] = node[next_hop].edge_cost[i];
-			//printf("For %d-%d Original Cost: %.2f  -- Original Cost: %.2f\n",i+1,next_hop+1,node[i].edge_cost[next_hop],node[next_hop].edge_cost[i]);
+	          //    temp->cost = node[i].edge_cost[next_hop];
 
 	        }
 		
 		p->next = temp;
 		p = p->next;
-		//j = i;
 		i = next_hop;
 	}
 
 
-/*
-	for(i=0;i<total_nodes;i++)
-	{
-		//printf("Pred for %d is: %d\n",i+1,node[i].pred+1);
-		if(i!=current_node - 1){
-			//node[current_node - 1].saved_cost
-			k = i;
-			j = node[i].pred;
-		
-			while(j!=current_node-1){
-				k = j;
-				j = node[j].pred;
-			}	
-			node[current_node - 1].next_hop[i] = k;
-			node[current_node - 1].saved_cost[i] = node[i].cost;	
-		}
-		else{
-			node[current_node - 1].next_hop[i] = i;
-			node[current_node - 1].saved_cost[i] = 0.0f;
-		}	
-	}
-*/	
 }
 
 
@@ -234,43 +153,6 @@ void reset_topology(){
 	}
 	
 }
-
-
-/*
-int main(int argc, char *argv[]){
-	int i;
-	total_nodes = -1;
-	int src,dest;
-	
-	if(argc != 4){
-		perror("Incorrect command line arguments\n");
-		exit(-1);
-	}
-	file = fopen(argv[1],"r");
-	initialize_topology();
-	src = atoi(argv[2])-1;
-	dest = atoi(argv[3])-1;
-//	for(i=0;i<total_nodes;i++)
-//	{
-	modified_dijkstra(src);
-	save_path(src,dest);
-//	reset_topology();
-//		printf("Time taken for source Node %d is : %.15lf microseconds\n",i+1,(double)(end.tv_usec-start.tv_usec + (end.tv_sec-start.tv_sec)));
-
-
-//	}
-
-	print_path(src,dest);	
-
-	for(i=0;i<total_nodes;i++)
-	{
-		free(node[i].edge_cost);
-//		free(node[i].saved_cost);
-//		free(node[i].next_hop);
-	}
-	free(node);
-}	
-*/
 void initialize_topology(){
 	int i,j;
 	if(!file){
@@ -336,22 +218,7 @@ void initialization()
 
 
 }
-/*void print_topology(int src)
-{
-	int k;
-	printf("\nRouting table of node %d -->\n\n",src);
-        printf("  Destination\t  Next Hop \tCost to Destination\n");
-        printf("---------------------------------------------------\n");
 
-        for(k = 0;k < total_nodes; k++){
-                       // if(node[i].edge_cost[k]!=0)
-                        //if(node[k].cost!=999999)
-                        printf("  %d\t\t  %d   \t\t\t   %.2lf\n",k+1,node[src-1].next_hop[k]+1,node[src-1].saved_cost[k]);
-                        //else
-                        //printf("  %d\t  %d\tINFINITY\n",src,k+1);
-        }
-
-}*/
 
 int all_flags_set()
 {

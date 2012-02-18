@@ -1,3 +1,45 @@
-mawagha
-And it starts nowwwww!! 
-Starting Modified Dijkstra's algorithm
+Following are the instructions for compiling and running the three source codes:
+1. We have created a Makefile that will generate all the required binaries.
+2. Under proj1 folder, we perform the following commands.
+	make clean ; make
+
+To Run Modified Dijkstra's algorithm:
+	./modified_disjktra <input_file> src_node dest_node
+
+For example:
+	./modified_dijkstra 10node.txt 1 10
+
+
+To Run Edge Disjoint shortest path algorithm:
+	./edge_disjoint <input_file> src_node dest_node
+
+For example:
+	./edge_disjoint 10node.txt 1 10
+
+
+To Run Vertex Disjoint shortest path algorithm:
+        ./vertex_disjoint <input_file> src_node dest_node
+
+For example:
+        ./vertex_disjoint 10node.txt 1 10
+
+
+Sample outputs: 
+
+1. Modified Dijkstra's Algorithm:
+sagar@ubuntu:~/Survivable_P1$ ./modified_dijkstra 75node.txt 23 61
+Src: 23, Dest: 61 ->
+23	19	24	1	17	48	58	64	65	36	13	56	62	61	
+Its Cost is: 3169.80
+
+
+2. Edge Disjoint Shortest Path Algorithm:
+sagar@ubuntu:~/Survivable_P1$ ./edge_disjoint 75node.txt 1 75
+Src: 1, Dest: 75 ->
+Path 1 is:	1	17	48	26	46	43	75
+Its Cost is: 2176.70
+Path 2 is:	1	18	67	15	59	44	9	7	33	7	6	75
+Its Cost is: 2360.60
+
+
+3. Vertex Disjoint Shrotest Path Algorithm:

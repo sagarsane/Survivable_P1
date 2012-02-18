@@ -41,7 +41,9 @@ int main(int argc, char *argv[]){
 	//printf("Afer Dijkstra 2\n");
 	save_path(src,dest,1);
 	//printf("Afer Save Path 2\n");
-	//print_shortest_path(1);
+
+    	print_shortest_path(0);
+        print_shortest_path(1);
 
         //print_path(src,dest);   
 	find_interlace();

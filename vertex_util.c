@@ -8,9 +8,10 @@ void print_shortest_path(int index){
         printf("Path %d is:",index+1);
         while(p!=NULL){
                 if(p->next != NULL)
-                        printf("\t%d",p->nodes[0]+1);
+                    printf("\t%d",p->nodes[0]+1);
                 else
                         printf("\t%d\t%d",p->nodes[0]+1,p->nodes[1]+1);
+
                 cost += p->cost;
                 p = p->next;
         }
@@ -166,32 +167,7 @@ void split_node(int src, int dest){
 
 }
 
-/*void print_shortest_path(int index){
-	int i;
-	double cost = 0.0f;
-	Path *p;
-	p = path[index];
-	printf("\nPath %d is:",index+1);
-	while(p!=NULL){
-		printf("\t%d-%d",p->nodes[0]+1,p->nodes[1]+1);
-		cost += p->cost;
-		p = p->next;
-	}
-	printf("\nIts Cost is: %.2f\n",cost);
-}*/
 
-
-void print_path(int src, int dest)
-{
-        int i=src;
-        printf("The shortest path between %d and %d is:\n%d",src+1,dest+1,src+1);
-        while(i!=dest)
-        {
-                printf("\t%d-%d = %.2f",i+1,node[i].next_hop+1,node[i].edge_cost[node[i].next_hop]);
-                i = node[i].next_hop;
-        }
-        printf("\nThe cost of the path is: %.2lf\n\n",node[src].cost);
-}
 
 
 void find_interlace(){
@@ -208,7 +184,7 @@ void find_interlace(){
 		while(q!=NULL){
 			if((p->nodes[0] == q->nodes[0] && p->nodes[1] == q->nodes[1]) || (p->nodes[0] == q->nodes[1] && p->nodes[1] == q->nodes[0])){ 
 				//interlace found
-				//printf("Interlace Found for Edges: %d-%d \t %d-%d\n",p->nodes[0]+1,p->nodes[1]+1,q->nodes[0]+1,q->nodes[1]+1);
+				printf("Interlace Found for Edges: %d-%d \t %d-%d\n",p->nodes[0]+1,p->nodes[1]+1,q->nodes[0]+1,q->nodes[1]+1);
 				pslow->next = q->next;
 				qslow->next = p->next;
 				q = qslow->next;
@@ -255,7 +231,7 @@ void save_path_1(int src,int dest,int flag, Node *node){
         temp = malloc(sizeof(Path));
         temp->nodes[0] = src;
         temp->nodes[1] = next_hop;
-        temp->cost = node[src].edge_cost[next_hop];
+        //temp->cost = node[src].edge_cost[next_hop];
         path[flag] = temp; //head
         if(flag == 0){
                //printf("First in Save Path\n");
@@ -271,6 +247,7 @@ void save_path_1(int src,int dest,int flag, Node *node){
 
 
         }
+	temp->cost = node[src].edge_cost[next_hop];
 
         i = next_hop;
         p = temp;

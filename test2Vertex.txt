@@ -77,6 +77,7 @@ Path 2 is:	7	6	12	47	14
 Its Cost is: 970.20
 
 Src: 7, Dest: 15 ->
+Interlace Found for Edges: 9-44 	 44-9
 Path 1 is:	7	9	64	45	15
 Its Cost is: 1283.50
 Path 2 is:	7	33	46	44	59	15
@@ -101,6 +102,7 @@ Path 2 is:	7	9	44	59	15	67	18
 Its Cost is: 2116.70
 
 Src: 7, Dest: 19 ->
+Interlace Found for Edges: 26-48 	 48-26
 Path 1 is:	7	33	46	26	69	21	20	23	19
 Its Cost is: 2739.40
 Path 2 is:	7	9	64	58	48	17	1	24	19
@@ -119,18 +121,21 @@ Path 2 is:	7	9	64	58	48	17	49	2	25	3	21
 Its Cost is: 2996.40
 
 Src: 7, Dest: 22 ->
+Interlace Found for Edges: 69-21 	 21-69
 Path 1 is:	7	33	46	26	69	73	74	60	22
 Its Cost is: 3217.10
 Path 2 is:	7	9	64	58	48	17	49	2	25	3	21	3	22
 Its Cost is: 3093.50
 
 Src: 7, Dest: 23 ->
+Interlace Found for Edges: 26-48 	 48-26
 Path 1 is:	7	33	46	26	69	21	20	23
 Its Cost is: 2691.40
 Path 2 is:	7	9	64	58	48	17	1	24	19	23
 Its Cost is: 2718.70
 
 Src: 7, Dest: 24 ->
+Interlace Found for Edges: 17-1 	 1-17
 Path 1 is:	7	33	46	26	48	17	49	2	24
 Its Cost is: 2469.60
 Path 2 is:	7	9	44	59	15	67	18	1	24
@@ -341,6 +346,7 @@ Path 2 is:	7	33	46	26	48	58
 Its Cost is: 2097.90
 
 Src: 7, Dest: 59 ->
+Interlace Found for Edges: 9-44 	 44-9
 Path 1 is:	7	9	64	45	15	59
 Its Cost is: 1563.50
 Path 2 is:	7	33	46	44	59
