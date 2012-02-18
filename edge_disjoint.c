@@ -1,4 +1,4 @@
-#include "modified_dijkstra.h"
+#include "edge_disjoint.h"
 
 int main(int argc, char *argv[]){
         int i;
@@ -15,7 +15,15 @@ int main(int argc, char *argv[]){
 	//printf("After Init\n");
         src = atoi(argv[2])-1;
         dest = atoi(argv[3])-1;
-
+	printf("Src: %d, Dest: %d ->\n",src + 1,dest + 1);
+	if(src >= total_nodes || dest >= total_nodes || src < 0 || dest < 0){
+                printf("Source or Destination out of bounds. Exiting..\n\n");
+                exit(1);
+        }
+	else if(src == dest){
+		printf("Source and Destination are Same. Exiting..\n\n");
+		exit(1);
+	}
 	//Edge Disjoint Steps
 	//printf("Before\n");
         modified_dijkstra(src); //Source to Dest Path
@@ -25,7 +33,11 @@ int main(int argc, char *argv[]){
 	//printf("Afer Save Path 1\n");
 	reset_topology();
 	//printf("After Reset\n");
-	modified_dijkstra(src); //Run djkstra on the Updated *node Graph	
+	if(!modified_dijkstra(src)){ //Run djkstra on the Updated *node Graph	
+		print_shortest_path(0);
+		printf("No Pair of Shortest path exist. Exiting..\n\n");
+		exit(1);
+	}
 	//printf("Afer Dijkstra 2\n");
 	save_path(src,dest,1);
 	//printf("Afer Save Path 2\n");
@@ -36,7 +48,6 @@ int main(int argc, char *argv[]){
 
 	//save path for all paths
 	//printf("After Interlace\n");
-	printf("Src: %d, Dest: %d ->\n",src + 1,dest + 1);
 	print_shortest_path(0);
 	print_shortest_path(1);
 	printf("\n");

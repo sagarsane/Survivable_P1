@@ -1,4 +1,4 @@
-#include "modified_dijkstra.h"
+#include "edge_disjoint.h"
 
 
 void print_shortest_path(int index){
@@ -368,7 +368,7 @@ int modified_dijkstra(int src){
 	
 	int i,k;
 	double min;
-
+	int flag = 0;
 	k=src;
         //node[src-1].cost=0.0f;
         node[k].flag=1;
@@ -396,6 +396,7 @@ int modified_dijkstra(int src){
         do
         {
 	        min=INF;
+		flag = 0;
                 //Find next min
                 for(i=0;i<total_nodes;i++)
                 {
@@ -403,8 +404,13 @@ int modified_dijkstra(int src){
                         {
                                 min = node[i].cost;
                                 k=i;
+				flag = 1;
                         }
                 }
+		if( flag == 0  ) //cannot move ahead to find next minimum from given 'k' .. no shortest path will exist
+		{
+			return 0;	
+		}
                 node[k].flag=1;
                 for(i=0;i<total_nodes;i++)
                 {
@@ -425,6 +431,6 @@ int modified_dijkstra(int src){
                 }
 
         }while(!all_flags_set());
-	
+	return 1;
 }
 

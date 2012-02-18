@@ -367,7 +367,7 @@ int modified_dijkstra(int src, Node *node, int total_nodes){
 	
 	int i,k;
 	double min;
-
+	int flag = 0;
 	k=src;
         //node[src-1].cost=0.0f;
         node[k].flag=1;
@@ -395,6 +395,7 @@ int modified_dijkstra(int src, Node *node, int total_nodes){
 	//printf("Before DO\n");
         do
         {
+		flag = 0;
 	        min=INF;
                 //Find next min
                 for(i=0;i<total_nodes;i++)
@@ -403,8 +404,13 @@ int modified_dijkstra(int src, Node *node, int total_nodes){
                         {
                                 min = node[i].cost;
                                 k=i;
+				flag = 1;
                         }
                 }
+		if( flag == 0 )
+		{
+			return 0;
+		}
                 node[k].flag=1;
                 for(i=0;i<total_nodes;i++)
                 {
@@ -426,7 +432,7 @@ int modified_dijkstra(int src, Node *node, int total_nodes){
                 }
 	
         }while(!all_flags_set(node, total_nodes));
-	
+	return 1;
 	
 }
 
