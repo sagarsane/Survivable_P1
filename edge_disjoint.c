@@ -42,8 +42,8 @@ int main(int argc, char *argv[]){
 	save_path(src,dest,1);
 	//printf("Afer Save Path 2\n");
 
-    	print_shortest_path(0);
-        print_shortest_path(1);
+    	//print_shortest_path(0);
+        //print_shortest_path(1);
 
         //print_path(src,dest);   
 	find_interlace();

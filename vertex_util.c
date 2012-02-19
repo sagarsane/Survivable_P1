@@ -173,7 +173,9 @@ void split_node(int src, int dest){
 void find_interlace(){
 	
 	int i,j,flag = 0;
+	int pathflag=0;
 	Path *p,*q,*pslow,*qslow;
+	Path *pstart,*pend,*qstart,*qend;
 	pslow = path[0];
 //	qslow = path[1];
 	p = pslow->next;
@@ -182,31 +184,43 @@ void find_interlace(){
 		qslow = path[1];
 		q = qslow->next;
 		while(q!=NULL){
-			if((p->nodes[0] == q->nodes[0] && p->nodes[1] == q->nodes[1]) || (p->nodes[0] == q->nodes[1] && p->nodes[1] == q->nodes[0])){ 
+	 		if((p->nodes[0] == q->nodes[0] && p->nodes[1] == q->nodes[1]) || (p->nodes[0] == q->nodes[1] && p->nodes[1] == q->nodes[0])){		
+				flag=1;
 				//interlace found
-				printf("Interlace Found for Edges: %d-%d \t %d-%d\n",p->nodes[0]+1,p->nodes[1]+1,q->nodes[0]+1,q->nodes[1]+1);
-				pslow->next = q->next;
-				qslow->next = p->next;
-				q = qslow->next;
-				p = pslow->next;
-				flag = 1;
+				if(pathflag==0){
+					pathflag = 1;
+					pstart = pslow;
+					qend = q; 
+				}
+				pend = p;
+				qstart = qslow;
+				//printf("Interlace Found for Edges: %d-%d \t %d-%d\n",p->nodes[0]+1,p->nodes[1]+1,q->nodes[0]+1,q->nodes[1]+1);
+				break;
+				//pslow->next = q->next;
+				//qslow->next = p->next;
+				//q = qslow->next;
+				//p = pslow->next;
 			}
-			else{
-				qslow = q;
-				q = q->next;
-			}
+			qslow = q;
+			q = q->next;
 		}
 		
-		if(!flag){
+		if(flag==0 && pathflag == 1){
+			pathflag=0;
+		//	printf("manipulating pointers\n");
+			pstart->next = qend->next;
+			qstart->next = pend->next;
+			pslow = pstart;
+			p = pstart->next;
+		}
+		else{	//interlace found
 			pslow = p;
 			p = p->next;
 		}
 		flag = 0;
-
 	}
 
 }
-
 
 void save_path_1(int src,int dest,int flag, Node *node){
         int i,j,cost=0;
@@ -394,7 +408,7 @@ int modified_dijkstra(int src, Node *node, int total_nodes){
 			//change - if condition is only if i is not neighbor of k 
                         if(node[k].edge_cost[i]!=INF)
                         {
-                                if(node[k].cost + node[k].edge_cost[i] < node[i].cost)  //update predecessor and cost to src node
+                                if(node[k].cost + node[k].edge_cost[i] < node[i].cost-.00001)  //update predecessor and cost to src node
 				{
 					//printf("Setting Pred for %d to %d\n", i+1,k+1);
                                         node[i].pred = k;

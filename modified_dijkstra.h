@@ -8,7 +8,7 @@
 #include<time.h>
 #include<sys/time.h>
 #include<sys/resource.h>
-#define INF 999999.0
+#define INF 999999.0f
 typedef struct node_{
 	double *edge_cost;
 	int pred;

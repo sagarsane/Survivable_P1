@@ -92,7 +92,7 @@ void modified_dijkstra(int src, char flag){
 	k=src;
         //node[src-1].cost=0.0f;
         node[k].flag=1;
-
+	
 	for(i=0;i<total_nodes;i++)
 	{
 		if(i!=k)
@@ -113,6 +113,7 @@ void modified_dijkstra(int src, char flag){
 		}
 	//	printf("i: %d\n",i);
 	}
+	//printf("end of 1st loop\n");
         do
         {
 	        min=INF;
@@ -125,17 +126,20 @@ void modified_dijkstra(int src, char flag){
                                 k=i;
                         }
                 }
+		printf("k is %d and min is %.2f\n",k,min);
                 node[k].flag=1;
+		//printf("inner loop\n");
                 for(i=0;i<total_nodes;i++)
                 {
 			//change - if condition is only if i is not neighbor of k 
                         if(node[k].edge_cost[i]!=INF)
                         {
-                                if(node[k].cost + node[k].edge_cost[i] < node[i].cost)  //update predecessor and cost to src node
+                                if(node[k].cost + node[k].edge_cost[i] < node[i].cost-.00001)  //update predecessor and cost to src node
 				{
 					//printf("Setting Pred for %d to %d\n", i+1,k+1);
                                         node[i].pred = k;
                                         node[i].cost = node[k].cost+node[k].edge_cost[i];
+					printf("cost of %d from %d is now %.2f\n",i+1,k+1,node[i].cost);
 					//change
 					node[k].flag = 0; // S = S U {i}
                                 }
@@ -143,6 +147,7 @@ void modified_dijkstra(int src, char flag){
 			
 
                 }
+		//printf("baher\n");
 
         }while(!all_flags_set());
 	
@@ -162,9 +167,9 @@ int main(int argc, char *argv[]){
         initialize_topology();
         src = atoi(argv[2])-1;
         dest = atoi(argv[3])-1;
-	//printf("1\n");
+	printf("before dijkstra\n");
         modified_dijkstra(src,0);
-	//printf("2\n");
+	printf("after dijkstra\n");
         save_path(src,dest);
 	//printf("3\n");
         print_path(src, dest);

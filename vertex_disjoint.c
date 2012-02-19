@@ -58,8 +58,8 @@ int main(int argc, char *argv[]){
 //	printf("Afer Save Path 2\n");
 	//print_graph(node,total_nodes);
 	
-	print_shortest_path(0);
-	print_shortest_path(1);
+//	print_shortest_path(0);
+//	print_shortest_path(1);
 	
         //print_path(src,dest);   
 	find_interlace();
