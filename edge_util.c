@@ -1,6 +1,5 @@
 #include "edge_disjoint.h"
 
-
 void print_shortest_path(int index){
 	int i;
 	double cost = 0.0f;
@@ -119,8 +118,6 @@ void save_path(int src,int dest,int flag){
 	}
 	node[i].cost = cost;
 
-	//original function to print path using node structure
-	//print_path(src,dest);
 
 	Path *temp,*p;
 	int next_hop = node[src].next_hop;
@@ -129,9 +126,9 @@ void save_path(int src,int dest,int flag){
 	temp->nodes[1] = next_hop;
 	temp->cost = node[src].edge_cost[next_hop];
 	//temp->cost = node[src].cost;
-	path[flag] = temp; //head
+	//path[flag] = temp; //head
 	if(flag == 0){
-		  //    temp->cost = node[src].edge_cost[next_hop];
+//		      temp->cost = node[src].edge_cost[next_hop];
 
 		node[src].edge_cost[next_hop] = INF;
 		if(node[next_hop].edge_cost[src]!=INF)
@@ -139,16 +136,16 @@ void save_path(int src,int dest,int flag){
 
 	}
 	else{  //revert Edges
-		if(node[next_hop].edge_cost[src]!=INF)
+		if(node[next_hop].edge_cost[src]!=INF){
 			node[next_hop].edge_cost[src] = -node[next_hop].edge_cost[src];
-		node[src].edge_cost[next_hop] = node[next_hop].edge_cost[src];
-		 //     temp->cost = node[src].edge_cost[next_hop];
+		node[src].edge_cost[next_hop] = node[next_hop].edge_cost[src];}
+//		      temp->cost = -node[src].edge_cost[next_hop];}
 
 	}
-
+	path[flag] = temp;
 	//j = src;
 	i = next_hop;
-	p = temp;
+	p = path[flag];
 	while(i!=dest){
 		next_hop = node[i].next_hop;
 		temp = malloc(sizeof(Path));
@@ -158,20 +155,21 @@ void save_path(int src,int dest,int flag){
 		//temp->cost = node[i].cost;
 		temp->next = NULL;
 		if(flag == 0){
-	        //      temp->cost = node[i].edge_cost[next_hop];
+//	              temp->cost = node[i].edge_cost[next_hop];
                 	node[i].edge_cost[next_hop] = INF;
 			 if(node[next_hop].edge_cost[i]!=INF)
 		                node[next_hop].edge_cost[i] = -node[next_hop].edge_cost[i];
 		}
 	        else{  //revert Edges
-			 if(node[next_hop].edge_cost[i]!=INF)
+			 if(node[next_hop].edge_cost[i]!=INF){
 	                	node[next_hop].edge_cost[i] = -node[next_hop].edge_cost[i];
-        	        node[i].edge_cost[next_hop] = node[next_hop].edge_cost[i];
-	          //    temp->cost = node[i].edge_cost[next_hop];
+        	        node[i].edge_cost[next_hop] = node[next_hop].edge_cost[i];}
+	      //        temp->cost = -node[i].edge_cost[next_hop];}
 
 	        }
 		
 		p->next = temp;
+		temp = NULL;
 		p = p->next;
 		i = next_hop;
 	}

@@ -71,21 +71,18 @@ Path 2 is:	2	1	8	5	4
 Its Cost is: 10.00
 
 Src: 2, Dest: 5 ->
-Interlace Found for Edges: 3-8 	 8-3
 Path 1 is:	2	3	4	5
 Its Cost is: 11.00
 Path 2 is:	2	1	8	5
 Its Cost is: 6.00
 
 Src: 2, Dest: 6 ->
-Interlace Found for Edges: 3-8 	 8-3
 Path 1 is:	2	3	4	5	6
 Its Cost is: 14.00
 Path 2 is:	2	1	8	6
 Its Cost is: 5.50
 
 Src: 2, Dest: 7 ->
-Interlace Found for Edges: 3-8 	 8-3
 Path 1 is:	2	3	4	5	7
 Its Cost is: 14.00
 Path 2 is:	2	1	8	6	7
@@ -188,7 +185,6 @@ Path 2 is:	4	3	8	5
 Its Cost is: 7.00
 
 Src: 4, Dest: 6 ->
-Interlace Found for Edges: 5-8 	 8-5
 Path 1 is:	4	5	6
 Its Cost is: 7.00
 Path 2 is:	4	3	8	6
@@ -207,7 +203,6 @@ Path 2 is:	4	3	8
 Its Cost is: 6.00
 
 Src: 4, Dest: 9 ->
-Interlace Found for Edges: 5-8 	 8-5
 Path 1 is:	4	5	7	9
 Its Cost is: 11.00
 Path 2 is:	4	3	8	9
@@ -292,7 +287,6 @@ Path 2 is:	6	5	4	3
 Its Cost is: 11.00
 
 Src: 6, Dest: 4 ->
-Interlace Found for Edges: 8-5 	 5-8
 Path 1 is:	6	8	3	4
 Its Cost is: 6.50
 Path 2 is:	6	5	4
@@ -443,7 +437,6 @@ Path 2 is:	9	10	1
 Its Cost is: 7.00
 
 Src: 9, Dest: 2 ->
-Interlace Found for Edges: 8-1 	 1-8
 Path 1 is:	9	8	3	2
 Its Cost is: 6.00
 Path 2 is:	9	10	1	2
@@ -456,7 +449,6 @@ Path 2 is:	9	10	1	2	3
 Its Cost is: 14.00
 
 Src: 9, Dest: 4 ->
-Interlace Found for Edges: 8-5 	 5-8
 Path 1 is:	9	8	3	4
 Its Cost is: 7.00
 Path 2 is:	9	7	5	4

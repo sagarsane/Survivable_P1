@@ -34,12 +34,19 @@ Its Cost is: 3169.80
 
 
 2. Edge Disjoint Shortest Path Algorithm:
-sagar@ubuntu:~/Survivable_P1$ ./edge_disjoint 75node.txt 1 75
+agar@ubuntu:~/Survivable_P1$ ./edge_disjoint 75node.txt 1 75
 Src: 1, Dest: 75 ->
 Path 1 is:	1	17	48	26	46	43	75
 Its Cost is: 2176.70
-Path 2 is:	1	18	67	15	59	44	9	7	33	7	6	75
+Path 2 is:	1	18	67	15	59	44	9	7	6	75
 Its Cost is: 2360.60
 
 
 3. Vertex Disjoint Shrotest Path Algorithm:
+sagar@ubuntu:~/Survivable_P1$ ./vertex_disjoint 75node.txt 7 67
+Src: 7, Dest: 67 ->
+Path 1 is:	7	9	44	59	15	67
+Its Cost is: 1161.20
+Path 2 is:	7	6	35	34	13	36	65	63	5	31	37	68	66	67
+Its Cost is: 2651.50
+

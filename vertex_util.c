@@ -207,7 +207,7 @@ void find_interlace(){
 		
 		if(flag==0 && pathflag == 1){
 			pathflag=0;
-		//	printf("manipulating pointers\n");
+			//printf("manipulating pointers\n");
 			pstart->next = qend->next;
 			qstart->next = pend->next;
 			pslow = pstart;
